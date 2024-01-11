@@ -1,1 +1,120 @@
 @import "reset";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@400;500;700;900&display=swap');
+
+$black: black;
+$black2:#333333;
+$black3:#00000080;
+$white: white;
+$blue: #00C0EE;
+$gray: #C7C7C7;
+$gray2: #666666;
+
+
+
+
+.main-header {
+    border-bottom: 2px solid $gray;
+    
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 162px;
+    }
+    &__logo {
+        &:hover {
+            cursor: pointer;
+            transition-duration: 250ms;
+            transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+            opacity: 80%;
+        }
+    }
+    &__main-bag {
+        position: relative;
+        cursor: pointer;
+        &:hover {
+            cursor: pointer;
+            transition-duration: 250ms;
+            transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+            opacity: 80%;
+        }
+    }
+    &__bag-icon{
+        width: 20px;
+        height: 23px;
+    }
+    &__counter {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        top: 14px;
+        left: 10px;
+        background-color: $blue;
+        border-radius: 16px;
+        font-family: roboto;
+        color: $white;
+        text-align: center;
+        font-weight: 400;
+        font-size: 14px;
+    }
+}
+.content-order {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 162px;
+    align-items: center;
+    position: relative;
+    &__title {
+        color:$black2;
+        font-size: 32px;
+        font-family: Open Sans;
+    }
+    &__order {
+        position: relative;
+        border: 1px solid $black3;
+        padding: 10px 34px 10px 10px;
+        cursor: pointer;
+        &__text {
+            font-size: 16px;
+            font-family: Open Sans;
+        }
+        &__icon {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid $gray2;
+            border-left: 2px solid $gray2;
+            rotate: 225deg;
+            top: 11px;
+            left: 114px;
+        }
+    }
+    &__order-by {
+        display: none;
+    }
+    &__order-by-active {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: 141px;
+        top: 36px;
+        left: -1px;
+        border: 1px solid $gray2;
+        &__option {
+            font-family: open sans;
+            font-size: 16px;
+            padding: 10px 0 10px 10px;
+            &:hover {
+                color: $white;
+                background-color: $blue;
+            }
+        }
+    }
+}
+.content-options-product {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 162px;
+    align-items: center;
+}
+
