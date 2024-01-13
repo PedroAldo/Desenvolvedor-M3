@@ -6,14 +6,15 @@ $black2:#333333;
 $black3:#00000080;
 $white: white;
 $blue: #00C0EE;
-$gray: #C7C7C7;
-$gray2: #666666;
+$gray: #666666;
+$gray2: #C7C7C7;
+
 
 
 
 
 .main-header {
-    border-bottom: 2px solid $gray;
+    border-bottom: 2px solid $gray2;
     
     &__content {
         display: flex;
@@ -64,6 +65,7 @@ $gray2: #666666;
     padding: 40px 162px;
     align-items: center;
     position: relative;
+    user-select: none;
     &__title {
         color:$black2;
         font-size: 32px;
@@ -82,8 +84,8 @@ $gray2: #666666;
             position: absolute;
             width: 8px;
             height: 8px;
-            border-top: 2px solid $gray2;
-            border-left: 2px solid $gray2;
+            border-top: 2px solid $gray;
+            border-left: 2px solid $gray;
             rotate: 225deg;
             top: 11px;
             left: 114px;
@@ -93,14 +95,17 @@ $gray2: #666666;
         display: none;
     }
     &__order-by-active {
+        user-select: none;
         position: absolute;
         display: flex;
         flex-direction: column;
         width: 141px;
         top: 36px;
         left: -1px;
-        border: 1px solid $gray2;
-        &__option {
+        border: 1px solid $gray;
+        &__most-recent,
+        &__low-price, 
+        &__big-price {
             font-family: open sans;
             font-size: 16px;
             padding: 10px 0 10px 10px;
@@ -111,10 +116,156 @@ $gray2: #666666;
         }
     }
 }
-.content-options-product {
+
+.content-option-product {
     display: flex;
     justify-content: space-between;
     padding: 40px 162px;
-    align-items: center;
+}
+.content-option__title {
+    font-family: Open Sans;
+    font-size: 16px;
+    margin-bottom: 14px;
+    color: $black2;
+}
+.content-option-color,
+.content-option-price {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+    &__checkbox input {
+        display: none;
+    }
+    &__checkbox input + label:before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        vertical-align: middle;
+        display: inline-block;
+        margin: 0 10px 4px 0;
+        outline: 1px solid $black3;
+        transition-duration: 250ms;
+        transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+    }
+    &__checkbox input:checked + label:before {
+        background-color: $blue;
+        box-sizing: border-box;
+        border: 2px solid $white;
+        cursor: pointer;
+        
+        
+    }
+    &__checkbox label {
+        font-family: Open Sans;
+        font-size: 14px;
+        cursor: pointer;
+        user-select: none;
+    }
+    &__see-more {
+        border: none;
+        padding: 0;
+        background-color: $white;
+        color: $gray;
+        position: relative;
+        font-size: 12px;
+        text-align: start;
+        cursor: pointer;
+        &:hover {
+            transition-duration: 250ms;
+            transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+            opacity: 70%;
+        }
+    }
+    &__see-more-border {
+        border-bottom: 1px solid $gray;
+    }
+    &__icon {
+        width: 6px;
+        height: 6px;
+        border-top: 1px solid $gray;
+        border-left: 1px solid $gray;
+        rotate: 225deg;
+        position: absolute;
+        top: 4px;
+        left: 110px;
+    }
+    &__active {
+       display: none;
+    }
 }
 
+.content-option-size {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 160px;
+    margin-bottom: 24px;
+    margin-top: 24px;
+    &__checkbox input{
+        display: none;
+    }
+    &__checkbox label {
+        font-family: Open Sans;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 32px;
+        min-height: 32px;
+        border: 1px solid $black3;
+        color: $black3;
+        cursor: pointer;
+        user-select: none;
+    }
+    &__checkbox input:checked + label {
+        border: 1px solid $blue;
+        color: $black;
+    }
+}
+
+.content-product {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+    max-width: 830px;
+    transition: ease-in-out;
+    &__name,
+    &__price,
+    &__parcelamento {
+        font-family: Open Sans;
+        color: $black;
+        text-align: center;
+    }
+    &__name {
+        font-size: 14px;
+        text-transform: uppercase;
+        
+        margin: 10px 0;
+    }
+    &__price {
+        font-weight: 700;
+    }
+    &__parcelamento {
+        color: $gray;
+        margin-bottom: 14px;
+        font-weight: 400;
+        margin-top: 6px;
+    }
+    &__button {
+        font-family: Open Sans;
+        font-size: 14px;
+        background-color: $black;
+        color: $white;
+        padding: 6px 62px;
+        border: none;
+    }
+    &__product img:hover,
+    &__button:hover  {
+        cursor: pointer;
+        transition-duration: 450ms;
+        transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+        opacity: 85%;
+        box-shadow: 0px 0px 10px $black;
+    }
+
+}
