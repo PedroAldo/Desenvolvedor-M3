@@ -67,7 +67,7 @@
       "parcelamento": [3, 40],
       "color": "Amarelo",
       "image": "/img/img_8.png",
-      "size": ["36", "U"],
+      "size": ["U", "36"],
       "date": "2000-12-17"
     },
     {

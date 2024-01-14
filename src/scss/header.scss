@@ -1,0 +1,48 @@
+@import "./colors.scss";
+
+.main-header {
+    border-bottom: 2px solid $gray2;
+    
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 162px;
+    }
+    &__logo {
+        &:hover {
+            cursor: pointer;
+            transition-duration: 250ms;
+            transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+            opacity: 80%;
+        }
+    }
+    &__main-bag {
+        position: relative;
+        cursor: pointer;
+        &:hover {
+            cursor: pointer;
+            transition-duration: 250ms;
+            transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+            opacity: 80%;
+        }
+    }
+    &__bag-icon{
+        width: 20px;
+        height: 23px;
+    }
+    &__counter {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        top: 14px;
+        left: 10px;
+        background-color: $blue;
+        border-radius: 16px;
+        font-family: roboto;
+        color: $white;
+        text-align: center;
+        font-weight: 400;
+        font-size: 14px;
+    }
+}

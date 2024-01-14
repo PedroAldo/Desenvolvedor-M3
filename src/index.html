@@ -22,8 +22,13 @@
       <section>
         <div class="content-order">
           <h1 class="content-order__title">Blusas</h1>
+          <div class="content-order__mobile">
+            <button class="content-order__mobile-filter">FILTRAR</button>
+            <button class="content-order__mobile-order">ORDENAR</button>
+          </div>
           <div class="content-order__order">
             <span class="content-order__order__text">Ordenar por:</span>
+            <span class="content-order__order__mobile-text">ORDENAR</span>
             <div class="content-order__order__icon"></div>
             <div class="content-order__order-by">
               <span class="content-order__order-by-active__most-recent">Mais recentes</span>
@@ -33,27 +38,27 @@
           </div>
         </div>
         <section class="content-option-product">
-          <div>
+          <div id="content">
             <h5 class="content-option__title">CORES</h5>
             <ul class="content-option-color">
               <div class="content-option-color__checkbox">
-                <input id="checkbox-color-1" type="checkbox" checked>
+                <input name="color" name="price" id="checkbox-color-1" type="radio" value="Amarelo">
                 <label for="checkbox-color-1">Amarelo</label>
               </div>
               <div class="content-option-color__checkbox">
-                <input id="checkbox-color-2" type="checkbox">
+                <input name="color" id="checkbox-color-2" type="radio" value="Azul">
                 <label for="checkbox-color-2">Azul</label>
               </div>
               <div class="content-option-color__checkbox">
-                <input id="checkbox-color-3" type="checkbox">
+                <input name="color" id="checkbox-color-3" type="radio" value="Branco">
                 <label for="checkbox-color-3">Branco</label>
               </div>
               <div class="content-option-color__checkbox">
-                <input id="checkbox-color-4" type="checkbox">
+                <input name="color" id="checkbox-color-4" type="radio" value="Cinza">
                 <label for="checkbox-color-4">Cinza</label>
               </div>
               <div class="content-option-color__checkbox">
-                <input id="checkbox-color-5" type="checkbox">
+                <input name="color" id="checkbox-color-5" type="radio" value="Laranja">
                 <label for="checkbox-color-5">Laranja</label>
               </div>
               <div class="content-option-color__see-more">
@@ -64,23 +69,23 @@
               </div>
               <section class="content-option-color content-option-color__active">
                 <div class="content-option-color__checkbox">
-                  <input id="checkbox-color-6" type="checkbox">
+                  <input name="color" id="checkbox-color-6" type="radio" value="Verde">
                   <label for="checkbox-color-6">Verde</label>
                 </div>
                 <div class="content-option-color__checkbox">
-                  <input id="checkbox-color-7" type="checkbox">
+                  <input name="color" id="checkbox-color-7" type="radio" value="Vermelho">
                   <label for="checkbox-color-7">Vermelho</label>
                 </div>
                 <div class="content-option-color__checkbox">
-                  <input id="checkbox-color-8" type="checkbox">
+                  <input name="color" id="checkbox-color-8" type="radio" value="Preto">
                   <label for="checkbox-color-8">Preto</label>
                 </div>
                 <div class="content-option-color__checkbox">
-                  <input id="checkbox-color-9" type="checkbox">
+                  <input name="color" id="checkbox-color-9" type="radio" value="Rosa">
                   <label for="checkbox-color-9">Rosa</label>
                 </div>
                 <div class="content-option-color__checkbox">
-                  <input id="checkbox-color-10" type="checkbox">
+                  <input name="color" id="checkbox-color-10" type="radio" value="Vinho">
                   <label for="checkbox-color-10">Vinho</label>
                 </div>
               </section>
@@ -88,77 +93,84 @@
             <h5 class="content-option__title">TAMANHOS</h5>
             <ul class="content-option-size">
               <div class="content-option-size__checkbox">
-                <input id="checkbox-size-1" type="checkbox">
+                <input name="size" id="checkbox-size-1" type="radio" value=P>
                 <label for="checkbox-size-1">P</label>
               </div>
               <div class="content-option-size__checkbox">
-                <input id="checkbox-size-2" type="checkbox">
+                <input name="size" id="checkbox-size-2" type="radio" value=M>
                 <label for="checkbox-size-2">M</label>
               </div>
               <div class="content-option-size__checkbox">
-                <input id="checkbox-size-3" type="checkbox">
+                <input name="size" id="checkbox-size-3" type="radio" value=G>
                 <label for="checkbox-size-3">G</label>
               </div>
               <div class="content-option-size__checkbox">
-                <input id="checkbox-size-4" type="checkbox">
+                <input name="size" id="checkbox-size-4" type="radio" value=GG>
                 <label for="checkbox-size-4">GG</label>
               </div>
               <div class="content-option-size__checkbox">
-                <input id="checkbox-size-5" type="checkbox">
+                <input name="size" id="checkbox-size-5" type="radio" value=U>
                 <label for="checkbox-size-5">U</label>
               </div>
               <div class="content-option-size__checkbox">
-                <input id="checkbox-size-6" type="checkbox">
+                <input name="size" id="checkbox-size-6" type="radio" value=36>
                 <label for="checkbox-size-6">36</label>
               </div>
               <div class="content-option-size__checkbox">
-                <input id="checkbox-size-7" type="checkbox">
+                <input name="size" id="checkbox-size-7" type="radio" value="38">
                 <label for="checkbox-size-7">38</label>
               </div>
               <div class="content-option-size__checkbox">
-                <input id="checkbox-size-8" type="checkbox">
+                <input name="size" id="checkbox-size-8" type="radio" value="40">
                 <label for="checkbox-size-8">40</label>
               </div>
               <div class="content-option-size__checkbox">
-                <input id="checkbox-size-9" type="checkbox">
+                <input name="size" id="checkbox-size-9" type="radio" value="36">
                 <label for="checkbox-size-9">36</label>
               </div>
               <div class="content-option-size__checkbox">
-                <input id="checkbox-size-10" type="checkbox">
+                <input name="size" id="checkbox-size-10" type="radio" value="38">
                 <label for="checkbox-size-10">38</label>
               </div>
               <div class="content-option-size__checkbox">
-                <input id="checkbox-size-11" type="checkbox">
+                <input name="size" id="checkbox-size-11" type="radio" value="40">
                 <label for="checkbox-size-11">40</label>
               </div>
             </ul>
             <h5 class="content-option__title">FAIXA DE PREÇO</h5>
             <ul class="content-option-price">
               <div class="content-option-price__checkbox">
-                <input id="checkbox-price-1"type="checkbox">
+                <input name="price" id="checkbox-price-1" type="radio" value=50>
                 <label for="checkbox-price-1">de R$0 até R$50</label>
               </div>
               <div class="content-option-price__checkbox">
-                <input id="checkbox-price-2"type="checkbox">
+                <input name="price" id="checkbox-price-2" type="radio" value=150>
                 <label for="checkbox-price-2">de R$50 até R$150</label>
               </div>
               <div class="content-option-price__checkbox">
-                <input id="checkbox-price-3"type="checkbox">
+                <input name="price" id="checkbox-price-3" type="radio" value=300>
                 <label for="checkbox-price-3">de R$151 até R$300</label>
               </div>
               <div class="content-option-price__checkbox">
-                <input id="checkbox-price-4"type="checkbox">
+                <input name="price" id="checkbox-price-4" type="radio" value=500>
                 <label for="checkbox-price-4">de R$301 até R$500</label>
               </div>
               <div class="content-option-price__checkbox">
-                <input id="checkbox-price-5"type="checkbox">
+                <input name="price" id="checkbox-price-5" type="radio" value=501>
                 <label for="checkbox-price-5">a partir de R$500</label>
               </div>
             </ul>
           </div>
-          <div class="content-product"></div>
+          <div class="content-product">
+          </div>
         </section>
-      </section>
+        </div>
+      </section name="footer">
+    </section>
+    <section>
+      <div class="footer">
+        <h5>M3: IMPLANTAÇÃO DE E-COMMERCE VTEX</h5>
+      </div>
     </section>
 </body>
 <script src="bundle.js"></script>
