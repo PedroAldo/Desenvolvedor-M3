@@ -19,9 +19,9 @@ function reset (option:string) {
 //botão para ver mais cores:
 const btn = document.querySelector(".content-option-color__see-more")
 btn.addEventListener("click", function () {
-  var checkbox = document.querySelector(".content-option-color__active")
-  checkbox.classList.remove("content-option-color__active")
-  btn.classList.add("content-option-color__active")
+  var checkbox = document.querySelector(".remove")
+  checkbox.classList.remove("remove")
+  btn.classList.add("remove")
 })
 
 
@@ -32,14 +32,16 @@ order.addEventListener("click", function() {
     orderBy.classList.toggle("content-order__order-by-active")
 })
 
-//ordernar pelo mais recente:
+//ordernar pelo mais recente desktop:
 const mostRecent = document.querySelector(".content-order__order-by-active__most-recent");
     mostRecent.addEventListener("click", function() {
-
+      reset("color")
+      reset("size")
+      reset("price")
       mostRecent.classList.add("content-order__order-by-active__most-recent-active")
       getAllposts("http://localhost:5000/products?_sort=date&_start=0&_limit=9")
 })
-//ordenar pelo menor preço:
+//ordenar pelo menor preço desktop:
 const lowPrice = document.querySelector(".content-order__order-by-active__low-price");
     lowPrice.addEventListener("click", function() {
       reset("color")
@@ -48,7 +50,7 @@ const lowPrice = document.querySelector(".content-order__order-by-active__low-pr
       lowPrice.classList.add("content-order__order-by-active__low-price-active")
       getAllposts("http://localhost:5000/products?_sort=price&_start=0&_limit=9")
 })
-//ordenar pelo maior preço:
+//ordenar pelo maior preço desktop:
 const bigPrice = document.querySelector(".content-order__order-by-active__big-price");
     bigPrice.addEventListener("click", function() {
       reset("color")
@@ -69,7 +71,7 @@ function filter(option:string) {
             reset("size")
             reset("price")
           } else if (option === "size") {
-            getAllposts(`http://localhost:5000/products?${option}=${checks[i]}`)
+            getAllposts(`http://localhost:5000/products?${option}_like=${checks[i].value}`)
             reset("color")
             reset("price")
           } else if (option === "price"){
@@ -151,7 +153,14 @@ async function getAllposts(serverUrl:string) {
     post.appendChild(div)
   })
   //botão de carregar mais itens
-    if (serverUrl === "http://localhost:5000/products?_start=0&_limit=4" || serverUrl === "http://localhost:5000/products?_start=0&_limit=9" || serverUrl === "http://localhost:5000/products?_sort=date&_start=0&_limit=9" || serverUrl === "http://localhost:5000/products?_sort=price&_start=0&_limit=9" || serverUrl ===  "http://localhost:5000/products?_sort=price&_order=desc&_start=0&_limit=9") { 
+    if (serverUrl === "http://localhost:5000/products?_sort=price&_order=desc&_start=0&_limit=4"
+    || serverUrl === "http://localhost:5000/products?_sort=price&_start=0&_limit=4"
+    || serverUrl=== "http://localhost:5000/products?_sort=date&_start=0&_limit=4" 
+    || serverUrl === "http://localhost:5000/products?_start=0&_limit=4" 
+    || serverUrl === "http://localhost:5000/products?_start=0&_limit=9" 
+    || serverUrl === "http://localhost:5000/products?_sort=date&_start=0&_limit=9" 
+    || serverUrl === "http://localhost:5000/products?_sort=price&_start=0&_limit=9" 
+    || serverUrl ===  "http://localhost:5000/products?_sort=price&_order=desc&_start=0&_limit=9") { 
       var more = document.createElement("div")
       var moreButton = document.createElement("button")
       moreButton.innerHTML = "CARREGAR MAIS"
@@ -163,20 +172,122 @@ async function getAllposts(serverUrl:string) {
     }
   )}
 }
-media()
 
-
-const mobileFilter = document.querySelector(".content-order__mobile-order")
+//Abre as opções de ordem no mobile
+const mobileOrder = document.querySelector(".content-order__mobile-order")
+mobileOrder.addEventListener("click", function() {
+      const query = document.querySelector(".content-order__mobile-sort")
+      query.classList.add("content-order__mobile-sort-active")
+      document.querySelector(".content-option-product").classList.add("content-option-product-desactive")
+})
+//abre as opções de filtragem no mobile
+const mobileFilter = document.querySelector(".content-order__mobile-filter")
 mobileFilter.addEventListener("click", function() {
-  const orderBy = document.querySelector(".content-order__order-by")
-  document.querySelector(".content-order__order").classList.add("content-order__order-mobile")
-  document.querySelector(".content-order__order").classList.remove("content-order__order")
-  orderBy.classList.toggle("content-order__order-by-active")
+    const query = document.querySelector(".content-filter__mobile-option")
+    query.classList.add("content-filter__mobile-option-active")
+    document.querySelector(".content-option-product").classList.add("content-option-product-desactive")
 })
 
+
+
+
+//configura a opção de fechar, no icone X quando clicamos em ordenar no mobile
+const closeOrder = document.querySelector(".content-order__mobile-close")
+closeOrder.addEventListener("click", function(){
+  document.querySelector(".content-order__mobile-sort-active").classList.remove("content-order__mobile-sort-active")
+  document.querySelector(".content-option-product").classList.remove("content-option-product-desactive")
+})
+//configura a opção de fechar, no icone X quando clicamos em filtrar no mobile
+const closeFilter = document.querySelector(".content-filter__mobile-close")
+closeFilter.addEventListener("click", function(){
+  document.querySelector(".content-filter__mobile-option-active").classList.remove("content-filter__mobile-option-active")
+  document.querySelector(".content-option-product").classList.remove("content-option-product-desactive")
+})
+
+//ordenar pelo mais recente mobile:
+const mostRecentMobile = document.querySelector(".content-order__order-by-active__most-recent-mobile");
+    mostRecentMobile.addEventListener("click", function() {
+      getAllposts("http://localhost:5000/products?_sort=date&_start=0&_limit=4")
+      document.querySelector(".content-order__mobile-sort-active").classList.remove("content-order__mobile-sort-active")
+      document.querySelector(".content-option-product").classList.remove("content-option-product-desactive")
+})
+//ordenar pelo menor preço mobile:
+const lowPriceMobile = document.querySelector(".content-order__order-by-active__low-price-mobile");
+    lowPriceMobile.addEventListener("click", function() {
+      getAllposts("http://localhost:5000/products?_sort=price&_start=0&_limit=4")
+      document.querySelector(".content-order__mobile-sort-active").classList.remove("content-order__mobile-sort-active")
+      document.querySelector(".content-option-product").classList.remove("content-option-product-desactive")
+})
+//ordenar pelo maior preço mobile:
+const bigPriceMobile = document.querySelector(".content-order__order-by-active__big-price-mobile");
+    bigPriceMobile.addEventListener("click", function() {
+      getAllposts("http://localhost:5000/products?_sort=price&_order=desc&_start=0&_limit=4")
+      document.querySelector(".content-order__mobile-sort-active").classList.remove("content-order__mobile-sort-active")
+      document.querySelector(".content-option-product").classList.remove("content-option-product-desactive")
+})
+
+//botão de exibir as cores
+const bntMobileColor = document.querySelector(".content-filter__color-title")
+bntMobileColor.addEventListener("click", function() {
+  var colors = document.querySelector(".content-option-color")
+  var contentColor = document.querySelector(".content-filter__color")
+  var checkbox = document.querySelector(".remove")
+  checkbox.classList.remove("remove")
+  btn.classList.add("remove")
+  document.querySelector(".content-filter__color-icon1").classList.toggle("content-filter__color-icon-active1");
+  document.querySelector(".content-filter__color-icon2").classList.toggle("content-filter__color-icon-active2");
+  
+  if(colors.parentNode.nodeName === "H5") {
+    contentColor.appendChild(colors)
+  } else
+    document.querySelector(".content-option__title").appendChild(colors)
+    reset("color")
+    getAllposts("http://localhost:5000/products?_start=0&_limit=4")
+})
+
+//botão de exibir os tamanhos
+const bntMobileSize = document.querySelector(".content-filter__size-title")
+bntMobileSize.addEventListener("click", function() {
+  var sizes = document.querySelector(".content-option-size")
+  var contentSize = document.querySelector(".content-filter__size")
+  var checkbox = document.querySelector(".remove")
+  checkbox.classList.remove("remove")
+  btn.classList.add("remove")
+  document.querySelector(".content-filter__size-icon1").classList.toggle("content-filter__size-icon-active1");
+  document.querySelector(".content-filter__size-icon2").classList.toggle("content-filter__size-icon-active2");
+  
+  if(sizes.parentNode.nodeName === "H5") {
+    contentSize.appendChild(sizes)
+  } else
+    document.querySelector(".content-option__title").appendChild(sizes)
+    reset("size")
+    getAllposts("http://localhost:5000/products?_start=0&_limit=4")
+})
+//botão de exibir os preços
+const bntMobilePrice = document.querySelector(".content-filter__price-title")
+bntMobilePrice.addEventListener("click", function() {
+  var prices = document.querySelector(".content-option-price")
+  var contentprice = document.querySelector(".content-filter__price")
+  var checkbox = document.querySelector(".remove")
+  checkbox.classList.remove("remove")
+  btn.classList.add("remove")
+  document.querySelector(".content-filter__price-icon1").classList.toggle("content-filter__price-icon-active1");
+  document.querySelector(".content-filter__price-icon2").classList.toggle("content-filter__price-icon-active2");
+  
+  if(prices.parentNode.nodeName === "H5") {
+    contentprice.appendChild(prices)
+  } else
+    document.querySelector(".content-option__title").appendChild(prices)
+    reset("price")
+    getAllposts("http://localhost:5000/products?_start=0&_limit=4")
+})
+
+//Confere o tamanho da página e define a partir dai quantos produtos serão carregados inicialmente
+media()
 function media () {
-  var query = window.matchMedia("(max-width:768px)")
-  if (query.matches) {
+  var queryMobile = window.matchMedia("(max-width:768px)")
+  if (queryMobile.matches) {
     getAllposts("http://localhost:5000/products?_start=0&_limit=4");
-  }else getAllposts("http://localhost:5000/products?_start=0&_limit=9");
+  }else
+  getAllposts("http://localhost:5000/products?_start=0&_limit=9");
 }

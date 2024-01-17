@@ -9,6 +9,44 @@
   <link rel="stylesheet" href="main.css"/>
 </head>
 <body>
+  <div class="content-order__mobile-sort">
+    <h5>ORDENAR</h5>
+    <div class="content-order__mobile-close">
+      <span class="content-order__mobile-close1"></span>
+      <span class="content-order__mobile-close2"></span>
+    </div>
+    <span class="content-order__order-by-active__most-recent-mobile">Mais recente</span>
+    <span class="content-order__order-by-active__low-price-mobile">Menor preço</span>
+    <span class="content-order__order-by-active__big-price-mobile">Maior preço</span>
+  </div>
+  <div class="content-filter__mobile-option">
+    <h5>FILTRAR</h5>
+    <div class="content-filter__mobile-close">
+      <span class="content-filter__mobile-close1"></span>
+      <span class="content-filter__mobile-close2"></span>
+    </div>
+      <div class="content-filter__color">
+        <h6 class="content-filter__color-title">CORES</h6>
+        <div class="content-filter__color-icon">
+          <span class="content-filter__color-icon1"></span>
+          <span class="content-filter__color-icon2"></span>
+        </div>
+      </div>
+      <div class="content-filter__size">
+        <h6 class="content-filter__size-title">TAMANHOS</h6>
+        <div class="content-filter__size-icon">
+          <span class="content-filter__size-icon1"></span>
+          <span class="content-filter__size-icon2"></span>
+        </div>
+      </div>
+      <div class="content-filter__price">
+        <h6 class="content-filter__price-title">FAIXA DE PREÇO</h6>
+        <div class="content-filter__price-icon">
+          <span class="content-filter__price-icon1"></span>
+          <span class="content-filter__price-icon2"></span>
+        </div>
+      </div>
+    </div>
     <section>
       <header class="main-header">
         <div class="main-header__content">
@@ -23,12 +61,11 @@
         <div class="content-order">
           <h1 class="content-order__title">Blusas</h1>
           <div class="content-order__mobile">
-            <button class="content-order__mobile-filter">FILTRAR</button>
-            <button class="content-order__mobile-order">ORDENAR</button>
+            <button class="content-order__mobile-filter">Filtrar</button>
+            <button class="content-order__mobile-order">Ordenar</button>
           </div>
           <div class="content-order__order">
             <span class="content-order__order__text">Ordenar por:</span>
-            <span class="content-order__order__mobile-text">ORDENAR</span>
             <div class="content-order__order__icon"></div>
             <div class="content-order__order-by">
               <span class="content-order__order-by-active__most-recent">Mais recentes</span>
@@ -67,7 +104,7 @@
                   <div class="content-option-color__icon"></div>
                 </button>
               </div>
-              <section class="content-option-color content-option-color__active">
+              <section class="content-color remove">
                 <div class="content-option-color__checkbox">
                   <input name="color" id="checkbox-color-6" type="radio" value="Verde">
                   <label for="checkbox-color-6">Verde</label>

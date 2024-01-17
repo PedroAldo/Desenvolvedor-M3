@@ -46,3 +46,11 @@
         font-size: 14px;
     }
 }
+
+@media (max-width:768px) {
+    .main-header {
+        &__content {
+            padding: 16px 26px;
+        }
+    }
+}
