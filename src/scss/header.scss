@@ -20,6 +20,14 @@
     &__main-bag {
         position: relative;
         cursor: pointer;
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        font-family: Open Sans;
+    }
+    &__bag-icon{
+        display: flex;
+        gap: 10px;
         &:hover {
             cursor: pointer;
             transition-duration: 250ms;
@@ -27,9 +35,32 @@
             opacity: 80%;
         }
     }
-    &__bag-icon{
-        width: 20px;
-        height: 23px;
+    &__bag-active {
+        display: block!important;
+    }
+    &__bag {
+        width: 400px;
+        height: 500px;
+        background: $white;
+        position: absolute;
+        right: -120px;
+        z-index: 2;
+        top: 46px;
+        overflow-y: auto;
+        font-family: Open Sans;
+        border: 1px solid $black;
+        display: none;
+    }
+    &__bag-content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    &__bag-total {
+        display: flex;
+        justify-content: end;
+        align-items: end;
     }
     &__counter {
         position: absolute;
@@ -39,11 +70,51 @@
         left: 10px;
         background-color: $blue;
         border-radius: 16px;
-        font-family: roboto;
+        font-family: Open sans;
         color: $white;
-        text-align: center;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 8px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.main-cart {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 300px;
+    gap: 30px;
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $gray2;
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 200px;
+    }
+    &__info-count {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        align-items: center;
+    }
+    &__image {
+        width: 70px;
+    }
+    &__add,
+    &__remove {
+        background-color: $white;
+        border: 1px solid $black;
+        padding: 4px 10px;
+        cursor: pointer;
+        &:hover {
+            background-color: $blue2;
+            transition-duration: 250ms;
+            transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+        }
     }
 }
 
@@ -51,6 +122,12 @@
     .main-header {
         &__content {
             padding: 16px 26px;
+        }
+        &__bag {
+            width: 370px;
+            top: 41px;
+            right: -26px;
+            height: 800px;
         }
     }
 }

@@ -1,5 +1,11 @@
+
 import { Product } from "./Product"
 
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", ready)
+} else {
+  ready()
+}
 //função que reseta os checkboxs marcados e as opções de filtragem
 function reset (option:string) {
   var check = document.getElementsByName(option)
@@ -12,6 +18,9 @@ function reset (option:string) {
   mostRecent.classList.remove("content-order__order-by-active__most-recent-active")
   lowPrice.classList.remove("content-order__order-by-active__low-price-active")
   bigPrice.classList.remove("content-order__order-by-active__big-price-active")
+  setTimeout(() => {
+    addToCart()
+  }, 300);
 }
 
 
@@ -141,6 +150,7 @@ async function getAllposts(serverUrl:string) {
     
 
     div.classList.add("content-product__product")
+    img.classList.add("content-product__img")
     name.classList.add("content-product__name")
     price.classList.add("content-product__price")
     parcelamento.classList.add("content-product__parcelamento")
@@ -152,6 +162,7 @@ async function getAllposts(serverUrl:string) {
     div.appendChild(button)
     post.appendChild(div)
   })
+
   //botão de carregar mais itens
     if (serverUrl === "http://localhost:5000/products?_sort=price&_order=desc&_start=0&_limit=4"
     || serverUrl === "http://localhost:5000/products?_sort=price&_start=0&_limit=4"
@@ -173,18 +184,154 @@ async function getAllposts(serverUrl:string) {
   )}
 }
 
+//função que atualiza o valor total dos produtos
+const bagContent = document.getElementsByClassName("main-cart")
+function updateAmount (){
+  let totalPrice = 0
+  setTimeout(() => {
+    for (var i = 0; i < bagContent.length; i++) {
+      const productPrice = bagContent[i].getElementsByClassName("main-cart__price")[0].innerHTML.replace("R$&nbsp;", "").replace(",", ".")
+      const productQuantity = bagContent[i].getElementsByClassName("main-cart__quantity")[0].innerHTML
+      let price = parseFloat(productPrice)
+      let quantity = parseInt(productQuantity);
+      totalPrice += price * quantity
+    }
+    let totalAmount = totalPrice.toFixed(2)
+    document.querySelector(".main-header__bag-total").innerHTML= `R$ <span class="main-header__bag-amount">${totalAmount}<span>`
+    if (totalAmount === "0.00"){
+      document.querySelector(".main-header__bag").classList.remove("main-header__bag-active")
+    }
+  }, 200);
+}
+
+
+
+//contador da dos acrescimos a quantidade de itens no icone do header
+function addCounterBag() {
+  const counter = document.querySelector(".main-header__counter") 
+  var aux = parseInt(counter.innerHTML)
+  aux++
+  document.querySelector(".main-header__counter").innerHTML = `${aux}`
+}
+//contador da dos decrescimos a quantidade de itens no icone do header
+function removeCounterBag() {
+  const counter = document.querySelector(".main-header__counter") 
+  var aux = parseInt(counter.innerHTML)
+  aux = aux - 1
+  document.querySelector(".main-header__counter").innerHTML = `${aux}`
+}
+
+//função que espera os elementos carregarem na tela para vincular o html ao JS
+setTimeout(() => {
+  addToCart ()
+}, 2500);
+//função que cria e adiciona o produto ao carrinho
+function addToCart () {
+  const buyButton = document.getElementsByClassName("content-product__button")
+  for(var i=0; i < buyButton.length; i++) {
+    buyButton[i].addEventListener("click", addProductToCart)
+  }
+}
+function addProductToCart(event:any) {
+  addCounterBag()
+  const btn = event.target
+  const productContent = btn.parentElement
+  const imageProduct = productContent.getElementsByClassName("content-product__img")[0].src
+  const titleProduct = productContent.getElementsByClassName("content-product__name")[0].innerText
+  const priceProduct = productContent.getElementsByClassName("content-product__price")[0].innerText
+  
+  const cartTitle:any = document.getElementsByClassName("main-cart__title")
+  for(var i = 0; i < cartTitle.length; i++) {
+    if (cartTitle[i].innerText === titleProduct) {
+      var aux = cartTitle[i].parentElement.parentElement.getElementsByClassName("main-cart__quantity")[0].innerHTML
+      aux = parseInt(aux)
+      aux++
+      cartTitle[i].parentElement.parentElement.getElementsByClassName("main-cart__quantity")[0].innerHTML = aux
+      updateAmount()
+      return
+    } 
+  }
+  
+  
+  var newProduct = document.createElement("div")
+  newProduct.classList.add("main-cart")
+  newProduct.innerHTML = `
+  <img class="main-cart__image" src="${imageProduct}" />
+  <div class="main-cart__info">
+  <h6 class="main-cart__title">${titleProduct}</h6>
+  <span class="main-cart__price">${priceProduct}</span>
+  <div class="main-cart__info-count">
+  <button class="main-cart__add">+</button>
+  <span class="main-cart__quantity">1</span>
+  <button class="main-cart__remove">-</button>
+  </div>
+  </div>`
+  
+  document.querySelector(".main-header__bag-content").appendChild(newProduct)
+  updateAmount()
+  ready()
+}
+
+//função que espera os elementos html carregar para coletar os elementos de click
+function ready() {
+  const buttonRemoveQuantity = document.getElementsByClassName("main-cart__remove")
+  for (var i = 0; i < buttonRemoveQuantity.length; i++) {
+    buttonRemoveQuantity[i].addEventListener("click", removeProduct)
+  }
+  const buttonAddQuantity = document.getElementsByClassName("main-cart__add")
+  for (var i = 0; i < buttonAddQuantity.length; i++) {
+    buttonAddQuantity[i].addEventListener("click", addProduct)
+  }
+  
+}
+//função que adiciona quantidade de produto no carrinho.
+function addProduct(event:any) {
+  const btn = event.target
+  const value = btn.parentElement.getElementsByClassName("main-cart__quantity")[0].innerHTML
+  var aux = value
+  aux = parseInt(aux)
+  aux++
+  btn.parentElement.getElementsByClassName("main-cart__quantity")[0].innerHTML = `${aux}`
+  addCounterBag()
+  updateAmount()
+
+}
+//função que remove quantidade de produtos do carrinho
+function removeProduct(event:any) {
+  const btn = event.target
+  const product = btn.parentElement.parentElement.parentElement
+  const value = btn.parentElement.getElementsByClassName("main-cart__quantity")[0].innerHTML
+      var aux = value
+      aux = parseInt(aux)
+      aux = aux - 1
+      btn.parentElement.getElementsByClassName("main-cart__quantity")[0].innerHTML = `${aux}`
+
+      if (aux <= 0) {
+        product.remove()
+      }
+      updateAmount()
+      removeCounterBag()
+}
+
+//função para abrir e fechar carrinho
+const toggleBag = document.querySelector(".main-header__bag-icon")
+toggleBag.addEventListener("click", function () {
+  document.querySelector(".main-header__bag").classList.toggle("main-header__bag-active")
+})
+
+
 //Abre as opções de ordem no mobile
 const mobileOrder = document.querySelector(".content-order__mobile-order")
 mobileOrder.addEventListener("click", function() {
-      const query = document.querySelector(".content-order__mobile-sort")
-      query.classList.add("content-order__mobile-sort-active")
-      document.querySelector(".content-option-product").classList.add("content-option-product-desactive")
+  const query = document.querySelector(".content-order__mobile-sort")
+  query.classList.add("content-order__mobile-sort-active")
+  document.querySelector(".content-option-product").classList.add("content-option-product-desactive")
 })
 //abre as opções de filtragem no mobile
 const mobileFilter = document.querySelector(".content-order__mobile-filter")
 mobileFilter.addEventListener("click", function() {
-    const query = document.querySelector(".content-filter__mobile-option")
-    query.classList.add("content-filter__mobile-option-active")
+  const query = document.querySelector(".content-filter__mobile-option")
+  query.classList.add("content-filter__mobile-option-active")
     document.querySelector(".content-option-product").classList.add("content-option-product-desactive")
 })
 
